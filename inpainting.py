@@ -100,14 +100,16 @@ def main():
 
   args = parser.parse_args()
 
-  # Initalize des readers 
-  # On utilise imageio pour l'import du fichier mp4 et sont export en h264 (pas possible avec le writer opencv standard)
-  reader = imageio.get_reader('input01.mp4')
-  fps = reader.get_meta_data()['fps']
-
-  # Recueration de l'arg parser
+  # Recuperation de l'arg parser
   input_path = Path(args.input)
   size_arg = int(args.size)
+
+
+  # Initalize des readers 
+  # On utilise imageio pour l'import du fichier mp4 et sont export en h264 (pas possible avec le writer opencv standard)
+  reader = imageio.get_reader(input_path)
+  fps = reader.get_meta_data()['fps']
+
 
   # Landmark model chargement (mediapipe sdk)
   base_options = python.BaseOptions(model_asset_path='hand_landmarker.task')
